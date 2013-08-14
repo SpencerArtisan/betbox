@@ -1,10 +1,12 @@
 require 'betfair'
+require 'ostruct'
 
 class Market
   EXCHANGE_ID= 1
 
   def initialize id
-    @bf = Betfair::API.new
+    puts "Market #{id}"
+    @bf = Betfair::API.new nil, false
     @helpers = Betfair::Helpers.new
     @id = id
     login
@@ -22,10 +24,10 @@ class Market
   end
 
   def odds
-    find_market
     results = prices
-    {player_a_win: results[0][:b1],
-     player_b_win: results[1][:b1]}
+    puts "#{results[0][:b3]}|#{results[0][:b2]}|#{results[0][:b1]}"
+    puts "#{results[1][:b3]}|#{results[1][:b2]}|#{results[1][:b1]}"
+    OpenStruct.new player_a_win: results[0][:b1], player_b_win: results[1][:b1]
   end
 
   def find_market
@@ -38,7 +40,10 @@ class Market
 
   def prices
     currency_code = nil
-    prices = @bf.get_market_prices_compressed @session_token, EXCHANGE_ID, @id, currency_code
-    @helpers.combine @market, prices
+    @prices = @bf.get_market_prices_compressed @session_token, EXCHANGE_ID, @id, currency_code
+    @helpers.combine @market, @prices
+  rescue
+    puts @prices
+    raise
   end
 end
