@@ -36,6 +36,7 @@ class Market
     from_date       = Time.now.utc
     to_date         = Time.now.utc
     @market = @bf.get_market @session_token, EXCHANGE_ID, @id, locale
+    raise "Market #{@id} is CLOSED" if @market[:market_status] == "CLOSED"
   end
 
   def prices

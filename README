@@ -1,0 +1,2 @@
+To run find the market id of an in-play tennis match and type
+    ruby -Ilib lib/application.rb [market id]

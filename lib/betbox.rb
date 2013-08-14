@@ -3,7 +3,7 @@ require 'market'
 
 class BetBox
   def watch market, loops
-    strategy = WinLossRatioStrategy.new(Market.new market.id)
+    strategy = WinLossRatioStrategy.new market
     1.upto loops do 
       strategy.take_bet?
       sleep 2
