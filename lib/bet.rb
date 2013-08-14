@@ -18,11 +18,11 @@ locale          = nil
 countries       = nil 
 from_date       = Time.now.utc
 to_date         = Time.now.utc + 1000
-markets = bf.get_all_markets(session_token, exchange_id, event_type_ids, locale, countries, from_date, to_date)
-puts "**********all_markets"
-puts helpers.all_markets markets
+#markets = bf.get_all_markets(session_token, exchange_id, event_type_ids, locale, countries, from_date, to_date)
+#puts "**********all_markets"
+#puts helpers.all_markets markets
 
-market_id     = 110501138
+market_id     = 110508119
 market = bf.get_market(session_token, exchange_id, market_id, locale)
 puts "**********market_info"
 puts helpers.market_info market
