@@ -8,5 +8,5 @@ begin
   market_id = ARGV[0].to_i
   BetBox.new.watch Market.new(market_id), 50
 rescue Exception => e
-  puts e.to_s
+  puts e
 end

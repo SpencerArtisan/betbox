@@ -1,4 +1,4 @@
-class WinLossRatioStrategy
+class WinOddsStrategy
   def initialize market
     @market = market
   end

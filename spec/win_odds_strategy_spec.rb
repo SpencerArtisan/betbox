@@ -1,9 +1,9 @@
-require 'win_loss_ratio_strategy'
+require 'win_odds_strategy'
 
-describe WinLossRatioStrategy do
+describe WinOddsStrategy do
   let (:odds) { double }
   let (:market) { double odds: odds }
-  let (:strategy) { WinLossRatioStrategy.new market }
+  let (:strategy) { WinOddsStrategy.new market }
 
   it 'should place a bet if the ratio is one' do
     odds.stub player_a_win: 2
