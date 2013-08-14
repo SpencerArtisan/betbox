@@ -1,11 +1,16 @@
 require 'win_odds_strategy'
+require 'lay_odds_strategy'
 require 'market'
 
 class BetBox
   def watch market, loops
-    strategy = WinOddsStrategy.new market
+    strategies = WinOddsStrategy.new, LayOddsStrategy.new
     1.upto loops do 
-      strategy.take_bet?
+      odds = market.odds
+      strategies.each do |strategy|
+        bet = strategy.take_bet? odds
+        puts "*************** SURE FIRE PROFIT!!! ****************" if bet
+      end
       sleep 2
     end
   end
