@@ -3,7 +3,7 @@ require 'lay_odds_strategy'
 require 'market'
 
 class BetBox
-  def watch market, loops
+  def watch market, loops, frequency
     strategies = WinOddsStrategy.new, LayOddsStrategy.new
     1.upto loops do 
       odds = market.odds
@@ -11,7 +11,9 @@ class BetBox
         bet = strategy.take_bet? odds
         puts "*************** SURE FIRE PROFIT!!! ****************" if bet
       end
-      sleep 2
+      sleep frequency
     end
+  ensure
+    market.close
   end
 end
