@@ -12,4 +12,6 @@ begin
   BetBox.new.log market, loops, frequency
 rescue Exception => e
   puts e
+ensure
+  market.close
 end

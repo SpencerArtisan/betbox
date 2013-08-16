@@ -13,18 +13,19 @@ class BetBox
       end
       sleep frequency
     end
-  ensure
-    market.close
   end
 
-  def log market, loops, frequency
-    CSV($stdout) do |csv|
+  def log market, loops, frequency, target = $stdout
+    CSV(target) do |csv|
       1.upto loops do 
         prices = market.prices
         hash_row = prices.to_hash {|row| row[:selection_name]}
+        time = Time.now.strftime("%d-%m-%Y %H:%M:%S")
+        hash_row = {Time: time}.merge hash_row
         csv.add_hash_row hash_row
         sleep frequency
       end
     end
+    target
   end
 end
