@@ -2,6 +2,7 @@ require 'win_odds_strategy'
 require 'lay_odds_strategy'
 require 'market'
 require 'ruby_ext'
+require 'odds'
 
 class BetBox
   def try_strategies market, loops, frequency, *strategies
