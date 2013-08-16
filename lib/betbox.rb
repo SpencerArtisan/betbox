@@ -1,7 +1,7 @@
 require 'win_odds_strategy'
 require 'lay_odds_strategy'
 require 'market'
-require 'csv'
+require 'ruby_ext'
 
 class BetBox
   def try_strategies market, loops, frequency, *strategies
@@ -21,7 +21,8 @@ class BetBox
     CSV.generate do |csv|
       1.upto loops do 
         prices = market.prices
-        csv.add_hash_row prices
+        hash_row = prices.to_hash {|row| row[:selection_name]}
+        csv.add_hash_row hash_row
         sleep frequency
       end
     end

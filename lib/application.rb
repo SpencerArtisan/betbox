@@ -2,6 +2,7 @@ require 'betbox'
 require 'market'
 require 'ostruct'
 require 'httpi'
+require 'csv'
 
 begin
   HTTPI.log = false
