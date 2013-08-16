@@ -18,7 +18,7 @@ class BetBox
   end
 
   def log market, loops, frequency
-    CSV.generate do |csv|
+    CSV($stdout) do |csv|
       1.upto loops do 
         prices = market.prices
         hash_row = prices.to_hash {|row| row[:selection_name]}
