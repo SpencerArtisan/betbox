@@ -6,7 +6,7 @@ class BetBox
   def watch market, loops, frequency
     strategies = WinOddsStrategy.new, LayOddsStrategy.new
     1.upto loops do 
-      odds = market.odds
+      odds = Odds.new market.prices
       strategies.each do |strategy|
         bet = strategy.take_bet? odds
         puts "*************** SURE FIRE PROFIT!!! ****************" if bet
