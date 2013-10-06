@@ -1,12 +1,6 @@
 require 'csv'
 require 'hash'
 
-class Array
-  def to_hash
-    Hash[*map{|entry| [yield(entry), entry]}.flatten]
-  end
-end
-
 class Hash
   def flat_hash k=[]
     new_hash = {}

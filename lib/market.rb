@@ -29,6 +29,7 @@ class Market
     to_date         = Time.now.utc
     @market = @bf.get_market @session_token, EXCHANGE_ID, @id, locale
     raise "Market is INVALID" if @market.to_s.starts_with? 'INVALID_MARKET'
+    puts @market.to_s
     raise "Market is CLOSED" if @market[:market_status] == "CLOSED"
     puts "#{@market[:runners][:runner][0][:name]} vs #{@market[:runners][:runner][1][:name]}"
   end

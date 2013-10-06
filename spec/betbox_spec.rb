@@ -9,8 +9,15 @@ describe BetBox do
   end
 
   it 'should log market data to a csv' do
-    market.stub(:prices).and_return([{selection_name: 'selection 1', data: 'data 1'}], [{selection_name: 'selection 2', data: 'data 2'}])
-    output = BetBox.new.log market, 2, 0, res = ""
-    expect(output).to eq "Time,selection 1/selection_name,selection 1/data\n01-09-2008 10:05:00,selection 1,data 1\n01-09-2008 10:05:00,selection 2,data 2\n"
+    odds1 = double player1: 1.2, player2: 3.4
+    odds2 = double player1: 5.6, player2: 7.8
+    match = double
+    match.stub(:odds).and_return odds1, odds2
+
+    output = BetBox.new.log match, 2, 0, res = ""
+    expect(output).to eq %{Time,Player1,Player2
+01-09-2008 10:05:00,1.2,3.4
+01-09-2008 10:05:00,5.6,7.8
+}
   end
 end

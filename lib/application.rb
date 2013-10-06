@@ -1,17 +1,11 @@
 require 'betbox'
-require 'market'
-require 'ostruct'
+require 'match'
 require 'httpi'
-require 'csv'
+require 'william_hill_feed'
 
 begin
   HTTPI.log = false
-  market_id, loops, frequency = ARGV[0].to_i, ARGV[1].to_i, ARGV[2].to_i
-  market = Market.new(market_id)
-  BetBox.new.try_strategies market, loops, frequency, WinOddsStrategy.new
-  #BetBox.new.log market, loops, frequency
-rescue Exception => e
-  puts e
-ensure
-  market.close
+  match_name, loops, frequency = ARGV[0], ARGV[1].to_i, ARGV[2].to_i
+  match = Match.new match_name, WilliamHillFeed.new
+  BetBox.new.log match, loops, frequency
 end
